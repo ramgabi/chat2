@@ -160,6 +160,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     height: 100%;
     border-radius: 30px 0 0 30px;
     background-color: #6C2E8B; }
+    .wrapper .nav-wrap .menu-list .menu-item {
+      position: relative; }
   .wrapper .info-wrap {
     position: relative;
     width: 280px;
@@ -178,7 +180,20 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       font-size: 2.2rem;
       font-weight: 300;
       color: #fff;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      /* &::before, &::after {
+                position: absolute;
+                top: calc(50% - 1px);
+                right: 15px;
+                content: '';
+                width: 10px;
+                height:1px;
+                background-color: #fff;
+            }
+
+            &.off::after {
+                transform: rotate(90deg);
+            } */ }
       .wrapper .info-wrap .info-tab.user-tit {
         display: flex;
         align-items: center;
@@ -195,25 +210,16 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           width: 25px;
           height: 25px;
           border-radius: 50%;
-          background-color: #fff; }
+          background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center/cover; }
         .wrapper .info-wrap .info-tab.user-tit .user-name {
           font-size: 2rem; }
-      .wrapper .info-wrap .info-tab::before, .wrapper .info-wrap .info-tab::after {
-        position: absolute;
-        top: calc(50% - 1px);
-        right: 15px;
-        content: '';
-        width: 10px;
-        height: 1px;
-        background-color: #fff; }
-      .wrapper .info-wrap .info-tab.off::after {
-        transform: rotate(90deg); }
       .wrapper .info-wrap .info-tab .info-user-num {
         opacity: .8;
         font-size: 1.2rem; }
     .wrapper .info-wrap .group-tit {
       position: relative;
       display: inline-block;
+      margin-top: 10px;
       margin-left: 15px;
       font-size: 2.2rem;
       line-height: 2.5;
@@ -239,18 +245,20 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         align-items: center;
         margin-bottom: 10px; }
         .wrapper .info-wrap .user-list .user-item.user-owner::after {
-          position: absolute;
-          top: 0;
-          left: 0;
           content: '';
-          background: url(img/user-owner.png) no-repeat top left; }
+          position: absolute;
+          top: -7px;
+          left: 10px;
+          width: 10px;
+          height: 10px;
+          background: url(img/user-owner.png) no-repeat top left/cover; }
         .wrapper .info-wrap .user-list .user-item .user-profile {
           display: inline-block;
           width: 30px;
           height: 30px;
           margin-right: 10px;
           border-radius: 50%;
-          background-color: #6C2E8B; }
+          background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center/cover; }
         .wrapper .info-wrap .user-list .user-item .user-name {
           font-size: 1.5rem;
           color: #666; }
@@ -263,6 +271,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           background-color: #6C2E8B;
           line-height: 2;
           color: rgba(255, 255, 255, 0.8); }
+          .wrapper .info-wrap .user-list .user-item .context-menu-list .context-menu-item a {
+            color: #fff; }
   .wrapper .content-wrap {
     width: calc(100% - 345px);
     height: 100%;
@@ -337,7 +347,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         .wrapper .content-wrap .chat-wrap .chat-system-msg.new {
           position: absolute;
           width: 710px;
-          bottom: 80px;
+          bottom: 85px;
           background-color: #bb98ca; }
       .wrapper .content-wrap .chat-wrap .chat-box {
         position: relative;
@@ -352,7 +362,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           width: 25px;
           height: 25px;
           border-radius: 50%;
-          background-color: #6C2E8B; }
+          background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center/cover; }
         .wrapper .content-wrap .chat-wrap .chat-box .user-name {
           display: block;
           font-size: 1.2rem; }
@@ -386,7 +396,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
             background-color: #F66363;
             color: #fff; }
           .wrapper .content-wrap .chat-wrap .chat-list .chat-item.chat-img {
-            padding: 10px; }
+            padding: 8px; }
             .wrapper .content-wrap .chat-wrap .chat-list .chat-item.chat-img img {
               display: block;
               width: 100%;
@@ -399,21 +409,38 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       .wrapper .content-wrap .chat-input-wrap .chat-frm {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
+        height: 42px;
         padding: 0 20px;
         border-radius: 10px;
         background-color: #8C3FAC;
         line-height: 3;
         box-sizing: border-box; }
         .wrapper .content-wrap .chat-input-wrap .chat-frm .chat-type {
+          position: relative;
           display: block;
+          padding-right: 10px;
           font-size: 1.5rem;
           color: #fff; }
+          .wrapper .content-wrap .chat-input-wrap .chat-frm .chat-type::after {
+            content: ':';
+            position: absolute;
+            top: 0;
+            right: 0; }
         .wrapper .content-wrap .chat-input-wrap .chat-frm .chat-input {
+          width: 100%;
+          height: calc(100% - 20px);
           margin-right: auto;
           padding-left: 10px;
+          border: none;
           background-color: #8C3FAC;
-          line-height: 3;
-          color: #fff; }
+          font-family: 'NanumSquare', sans-serif;
+          font-size: 1.7rem;
+          line-height: 1.35;
+          color: #fff;
+          overflow-y: hidden;
+          resize: none;
+          outline: none; }
           .wrapper .content-wrap .chat-input-wrap .chat-frm .chat-input::placeholder {
             font-weight: 300;
             color: #fff;
