@@ -58,6 +58,8 @@ table {
 }
 
 a {
+    color: inherit;
+
     &:link,
     &:hover,
     &:focus,
@@ -121,10 +123,21 @@ input[type=number] {
 
 
 .btn-basic {
-    padding: 8px 12px;
+    padding: 8px 18px;
     border: 0 none;
+    border-radius: 30px;
     background-color: transparent;
     outline: none;
+
+    &.bg-grey {
+        background-color: #999;
+        color: #fff;
+    }
+
+    &.bg-purple {
+        background-color: $purple-soft;
+        color: #fff;
+    }
 }
 
 .modal-basic {
@@ -142,6 +155,16 @@ input[type=number] {
         text-align: center;
         color: $purple-soft;
     }
+
+    .modal-bnt-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        .btn-basic {
+            margin: 0 10px;
+        }
+    }
     
     input[type="text"] {
         width: 200px;
@@ -158,26 +181,42 @@ input[type=number] {
     }
 }
 
-.modal-bnt-wrap {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;    
+.modal-room-member-wrap {
+    position: relative;
+    margin: 25px auto;
 
-    .btn-count {
-        width: 20px;
-        height: 20px;
-        padding-right: 10px;
-        border-radius: 10px 0 0 10px;
-        background-color: $purple-soft;
-        font-size: 2rem;
-        color: #fff;
+    .modal-bnt-wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+
+        .btn-count {
+            width: 20px;
+            height: 20px;
+            margin: 0 18px;
+            padding-right: 13px;
+            border-radius: 10px 0 0 10px;
+            background-color: $purple-soft;
+            font-size: 1.6rem;
+            line-height: 0;
+            color: #fff;
+
+            &:last-child {
+                transform: rotate(180deg);
+                padding-right: 15px;
+            }
+        }
     }
 
     input[type="number"] {
+        position: relative;
         width: 30px;
         font-size: 1.5rem;
         color: $purple-soft;
         text-align: center;
+        z-index: 99;
     }
 }
 
@@ -352,19 +391,24 @@ input[type=number] {
                         background: url(img/user-owner.png) no-repeat top left / cover;
                     }
                 }
-                
-                .user-profile {
-                    display: inline-block;
-                    width: 30px;
-                    height: 30px;
-                    margin-right: 10px;
-                    border-radius: 50%;
-                    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center / cover;
-                }
-    
-                .user-name {
-                    font-size: 1.5rem;
-                    color: #666;
+
+                > a {
+                    display: flex;
+                    align-items: center;
+
+                    .user-profile {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        margin-right: 10px;
+                        border-radius: 50%;
+                        background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center / cover;
+                    }
+        
+                    .user-name {
+                        font-size: 1.5rem;
+                        color: #666;
+                    }
                 }
     
                 .context-menu-list {
@@ -376,11 +420,13 @@ input[type=number] {
                     background-color: $purple;
                     line-height: 2;
                     color: rgba(255, 255, 255, 0.8);
+                    z-index: 3;
 
                     .context-menu-item a {
                         color: #fff;
                     }
                 }
+                
             }
 
         }

@@ -47,8 +47,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-a:link, a:hover, a:focus, a:visited, a:active {
-  text-decoration: none; }
+a {
+  color: inherit; }
+  a:link, a:hover, a:focus, a:visited, a:active {
+    text-decoration: none; }
 
 button {
   cursor: pointer;
@@ -81,10 +83,17 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   appearance: none; }
 
 .btn-basic {
-  padding: 8px 12px;
+  padding: 8px 18px;
   border: 0 none;
+  border-radius: 30px;
   background-color: transparent;
   outline: none; }
+  .btn-basic.bg-grey {
+    background-color: #999;
+    color: #fff; }
+  .btn-basic.bg-purple {
+    background-color: #8C3FAC;
+    color: #fff; }
 
 .modal-basic {
   min-width: 200px;
@@ -99,6 +108,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     font-weight: bold;
     text-align: center;
     color: #8C3FAC; }
+  .modal-basic .modal-bnt-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; }
+    .modal-basic .modal-bnt-wrap .btn-basic {
+      margin: 0 10px; }
   .modal-basic input[type="text"] {
     width: 200px;
     padding: 5px 10px;
@@ -110,23 +125,35 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       color: #8C3FAC;
       opacity: .5; }
 
-.modal-bnt-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px; }
-  .modal-bnt-wrap .btn-count {
-    width: 20px;
-    height: 20px;
-    padding-right: 10px;
-    border-radius: 10px 0 0 10px;
-    background-color: #8C3FAC;
-    font-size: 2rem;
-    color: #fff; }
-  .modal-bnt-wrap input[type="number"] {
+.modal-room-member-wrap {
+  position: relative;
+  margin: 25px auto; }
+  .modal-room-member-wrap .modal-bnt-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%); }
+    .modal-room-member-wrap .modal-bnt-wrap .btn-count {
+      width: 20px;
+      height: 20px;
+      margin: 0 18px;
+      padding-right: 13px;
+      border-radius: 10px 0 0 10px;
+      background-color: #8C3FAC;
+      font-size: 1.6rem;
+      line-height: 0;
+      color: #fff; }
+      .modal-room-member-wrap .modal-bnt-wrap .btn-count:last-child {
+        transform: rotate(180deg);
+        padding-right: 15px; }
+  .modal-room-member-wrap input[type="number"] {
+    position: relative;
     width: 30px;
     font-size: 1.5rem;
     color: #8C3FAC;
-    text-align: center; }
+    text-align: center;
+    z-index: 99; }
 
 .wrapper {
   width: 100vw;
@@ -252,16 +279,19 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           width: 10px;
           height: 10px;
           background: url(img/user-owner.png) no-repeat top left/cover; }
-        .wrapper .info-wrap .user-list .user-item .user-profile {
-          display: inline-block;
-          width: 30px;
-          height: 30px;
-          margin-right: 10px;
-          border-radius: 50%;
-          background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center/cover; }
-        .wrapper .info-wrap .user-list .user-item .user-name {
-          font-size: 1.5rem;
-          color: #666; }
+        .wrapper .info-wrap .user-list .user-item > a {
+          display: flex;
+          align-items: center; }
+          .wrapper .info-wrap .user-list .user-item > a .user-profile {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQMEM6-Bgl23YiSg4Phm80-NCHq_3mYoGpNxA&usqp=CAU) no-repeat center/cover; }
+          .wrapper .info-wrap .user-list .user-item > a .user-name {
+            font-size: 1.5rem;
+            color: #666; }
         .wrapper .info-wrap .user-list .user-item .context-menu-list {
           position: absolute;
           top: 50%;
@@ -270,7 +300,8 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           border-radius: 10px;
           background-color: #6C2E8B;
           line-height: 2;
-          color: rgba(255, 255, 255, 0.8); }
+          color: rgba(255, 255, 255, 0.8);
+          z-index: 3; }
           .wrapper .info-wrap .user-list .user-item .context-menu-list .context-menu-item a {
             color: #fff; }
   .wrapper .content-wrap {
