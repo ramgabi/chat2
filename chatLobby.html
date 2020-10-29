@@ -25,11 +25,7 @@
                     <h4 class="modal-tit">NEW ROOM</h4>
                     <form method="post" action="" name="modal-frm" class="modal-frm">
                         <input type="text" placeholder="방 이름을 입력해주세요" title="방 이름 입력" class="modal-room-name-input">
-                        <div class="modal-bnt-wrap">
-                            <button 
-                                @click.stop.prevent="userCount--"
-                                class="btn-basic btn-count"
-                            >-</button>
+                        <div class="modal-room-member-wrap">
                             <input 
                                 type="number" 
                                 @keyup="checkNum"
@@ -39,19 +35,25 @@
                                 title="방 인원 입력" 
                                 class="modal-room-user-input"
                             >
-                            <button  
-                                @click.stop.prevent="userCount++"
-                                class="btn-basic btn-count"
-                            >+</button>
+                            <div class="modal-bnt-wrap">
+                                <button 
+                                    @click.stop.prevent="userCount--"
+                                    class="btn-basic btn-count"
+                                >-</button>
+                                <button  
+                                    @click.stop.prevent="userCount++"
+                                    class="btn-basic btn-count"
+                                >+</button>
+                            </div>
                         </div>
                         <div class="modal-bnt-wrap">
                             <button 
                                 @click.stop.prevent=""
-                                class="btn-basic"
+                                class="btn-basic bg-purple"
                             >CREATE</button>
                             <button 
                                 @click.stop.prevent=""
-                                class="btn-basic"
+                                class="btn-basic bg-grey"
                             >CANCLE</button>
                         </div>
                     </form>
@@ -71,23 +73,12 @@
                     Online
                     <span class="info-user-num">99</span>
                 </h3>
-                <ul class="user-list">
-                    <li class="user-item user-owner">
-                        <span class="user-profile"></span>
-                        <span class="user-name">닉네임</span>
-                    </li>
-                    <li class="user-item">
-                        <span class="user-profile"></span>
-                        <span class="user-name">닉네임</span>
-                    </li>
-                    <li class="user-item">
-                        <span class="user-profile"></span>
-                        <span class="user-name">닉네임</span>
-                    </li>
-                </ul>
-                <div class="info-tab user-owner">
+                <div class="group-list">
+                    <userList title="1"></userList>
+                </div>
+                <div class="info-tab user-tit user-owner">
                     <span class="user-profile"></span>
-                    <span class="user-name">닉네임</span>
+                    <span class="user-name">right here</span>
                 </div>
             </section>
             <section class="content-wrap">
@@ -122,8 +113,47 @@
         </div>
     </div>
     <script>
+        let userList = {
+            props: [
+                'title'
+            ],
+            data() {
+                return {
+                    active: false
+                }
+            },
+            template: `
+                <h4 class="group-tit">
+                    <a href="#" @click.prevent="active = !active">User</a>
+                </h4>
+                <ul class="user-list" v-show="active">
+                    <li class="user-item user-owner">
+                        <a href="#">
+                            <span class="user-profile"></span>
+                            <span class="user-name">닉네임</span>
+                        </a>
+                    </li>
+                    <li class="user-item">
+                        <a href="#">
+                            <span class="user-profile"></span>
+                            <span class="user-name">닉네임</span>
+                        </a>
+                    </li>
+                    <li class="user-item">
+                        <a href="#">
+                            <span class="user-profile"></span>
+                            <span class="user-name">닉네임</span>
+                        </a>
+                    </li>
+                </ul>
+            `
+        }
+
         new Vue({
             el: '.app-wrap',
+            components: {
+                userList
+            },
             data: {
                 showModal: false,
                 userCount: 2
