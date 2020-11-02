@@ -24,13 +24,18 @@
                 <div class="modal-basic">
                     <h4 class="modal-tit">NEW ROOM</h4>
                     <form method="post" action="" name="modal-frm" class="modal-frm">
-                        <input type="text" placeholder="방 이름을 입력해주세요" title="방 이름 입력" class="modal-room-name-input">
+                        <input 
+                            type="text" 
+                            placeholder="방 이름을 입력해주세요" 
+                            v-model="roomName"
+                            title="방 이름 입력" 
+                            class="modal-room-name-input"
+                        >
                         <div class="modal-room-member-wrap">
                             <input 
                                 type="number" 
                                 @keyup="checkNum"
-                                v-model="userCount"
-                                :value="userCount" 
+                                v-model="roomUserCount"
                                 min="2" 
                                 max="99" 
                                 title="방 인원 입력" 
@@ -38,24 +43,24 @@
                             >
                             <div class="modal-bnt-wrap">
                                 <button 
-                                    @click.stop.prevent="userCount--"
+                                    @click.stop.prevent="roomUserCount--"
                                     class="btn-basic btn-count"
                                 >-</button>
                                 <button  
-                                    @click.stop.prevent="userCount++"
+                                    @click.stop.prevent="roomUserCount++"
                                     class="btn-basic btn-count"
                                 >+</button>
                             </div>
                         </div>
                         <div class="modal-bnt-wrap">
                             <button 
-                                @click.stop.prevent=""
+                                @click.stop.prevent="createRoom"
                                 class="btn-basic bg-purple"
                             >CREATE</button>
                             <button 
-                                @click.stop.prevent=""
+                                @click.stop.prevent="resetNewRoomModal"
                                 class="btn-basic bg-grey"
-                            >CANCLE</button>
+                            >CANCEL</button>
                         </div>
                     </form>
                 </div>
@@ -75,7 +80,7 @@
                     <span class="info-user-num">99</span>
                 </h3>
                 <div class="group-list">
-                    <userlist v-for="n in 3" class="room-item"></userlist>
+                    <userlist v-for="n in 3"></userlist>
                 </div>
                 <div class="info-tab user-tit user-owner">
                     <span class="user-profile"></span>
@@ -90,9 +95,15 @@
                         class="btn-basic"
                     >NEW ROOM</button>
                     <ul class="room-list">
-                        <!-- <roomlist v-for="roomItem in roomItems"></roomlist> -->
-                        <li v-for="item in roomItems">
-                            {{item.num}}
+                        <li v-for="roomitem in roomItems" class="room-item">
+                            <a href="#">
+                                <span class="room-num">{{roomitem.num | formatRoomNum}}</span>
+                                <span class="room-tit">{{roomitem.tit}}</span>
+                                <span class="room-own">{{roomitem.own}}</span>
+                                <span class="room-user">
+                                    <span class="room-user-num">{{roomitem.userNowNum}}</span>/{{roomitem.userNum}}
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -133,7 +144,7 @@
             },
             template: `
             <div>
-                <h4 class="group-tit">
+                <h4 class="group-tit" :class="{off : !active}">
                     <a href="#" @click.prevent="active = !active">User</a>
                 </h4>
                 <ul class="user-list" v-show="active">
@@ -169,20 +180,52 @@
             },
             data: {
                 showModal: false,
-                userCount: 2,
+                roomName : null,
+                roomUserCount: 1,
                 roomItems: [
-                    {num : 001,
+                    {num : 1,
                         tit : '제목입니다',
                         own : '방방장장',
+                        userNowNum : 3,
                         userNum : 5},
-                    {num : 002,
+                    {num : 2,
                         tit : '제목입니sasdsafasfasfsaf다',
                         own : '방장',
+                        userNowNum : 43,
                         userNum : 50},
-                    {num : 003,
+                    {num : 3,
                         tit : '제입니다',
                         own : '방장장',
+                        userNowNum : 1,
                         userNum : 3}
+                ],
+                groupItems: [
+                    {
+                        tit : 'User',
+                        own : '방방장장',
+                        userlist : [
+                            '함수',
+                            'lenove',
+                            '이벤트바인딩'
+                        ]
+                    },
+                    {
+                        tit : 'Group1',
+                        own : '방방장장',
+                        userlist : [
+                            '1252324',
+                            '랄라',
+                            '도움말도움말'
+                        ]
+                    },
+                    {
+                        tit : 'Group2',
+                        own : '방방장장',
+                        userlist : [
+                            '객체가아니라id',
+                            'renderingComplete'
+                        ]
+                    },
                 ]
             },
             methods: {
@@ -195,6 +238,28 @@
                 checkNum: function() {
                     console.log(this.userCount)
                     // userCount < 2 ? userCount = 2 : userCount > 99 ? userCount = 99 : userCount 
+                },
+                createRoom: function() {
+                    const newRoom = {
+                        num : this.roomItems.length + 1,
+                        tit : this.roomName,
+                        own : 'test',
+                        userNowNum : 0,
+                        userNum : this.roomUserCount
+                    }
+                    this.roomItems.push(newRoom)
+                    this.resetNewRoomModal()
+                },
+                resetNewRoomModal: function() {
+                    this.roomName = null
+                    this.roomUserCount = 2
+
+                    this.closeModal()
+                }
+            },
+            filters: {
+                formatRoomNum: function(num) {
+                    return String(num).padStart(3, 0)
                 }
             }
         })

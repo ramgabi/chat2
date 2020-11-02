@@ -196,7 +196,7 @@ input[type=number] {
             width: 20px;
             height: 20px;
             margin: 0 18px;
-            padding-right: 13px;
+            padding: 0 13px;
             border-radius: 10px 0 0 10px;
             background-color: $purple-soft;
             font-size: 1.6rem;
@@ -531,7 +531,7 @@ input[type=number] {
                     display: none;
                 }
         
-                .room-item {
+                .room-item a {
                     display: flex;
                     justify-content: space-between;
                     margin: 10px 0;

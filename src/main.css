@@ -138,7 +138,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
       width: 20px;
       height: 20px;
       margin: 0 18px;
-      padding-right: 13px;
+      padding: 0 13px;
       border-radius: 10px 0 0 10px;
       background-color: #8C3FAC;
       font-size: 1.6rem;
@@ -374,7 +374,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
         scrollbar-width: none; }
         .wrapper .content-wrap .room-wrap .room-list::-webkit-scrollbar {
           display: none; }
-        .wrapper .content-wrap .room-wrap .room-list .room-item {
+        .wrapper .content-wrap .room-wrap .room-list .room-item a {
           display: flex;
           justify-content: space-between;
           margin: 10px 0;
@@ -384,13 +384,13 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           background-color: #8C3FAC;
           font-size: 1.3rem;
           color: #fff; }
-          .wrapper .content-wrap .room-wrap .room-list .room-item > span {
+          .wrapper .content-wrap .room-wrap .room-list .room-item a > span {
             padding: 0 10px; }
-          .wrapper .content-wrap .room-wrap .room-list .room-item .room-tit {
+          .wrapper .content-wrap .room-wrap .room-list .room-item a .room-tit {
             margin-right: auto; }
-          .wrapper .content-wrap .room-wrap .room-list .room-item .room-own {
+          .wrapper .content-wrap .room-wrap .room-list .room-item a .room-own {
             position: relative; }
-            .wrapper .content-wrap .room-wrap .room-list .room-item .room-own::after {
+            .wrapper .content-wrap .room-wrap .room-list .room-item a .room-own::after {
               content: '';
               position: absolute;
               bottom: 7px;
