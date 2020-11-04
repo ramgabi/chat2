@@ -10,6 +10,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="stylesheet" href="src/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -87,8 +88,15 @@
             <section class="content-wrap">
                 <h3 class="skip">채팅</h3>
                 <div class="chat-wrap">
-                    <p class="chat-system-msg">Bee님이 방에 접속하셨습니다</p>
-                    <div class="chat-box">
+                    <div v-for="msgItem in msgList" class="chat-box">
+                        <span class="user-profile"></span>
+                        <span class="user-name">{{msgItem.user}}</span>
+                        <div class="chat-list">
+                            <p class="chat-item" :class="msgItem.type">{{msgItem.text}}</p>
+                        </div>
+                    </div>
+                    <!-- <p class="chat-system-msg">Bee님이 방에 접속하셨습니다</p> -->
+                    <!-- <div class="chat-box">
                         <span class="user-profile"></span>
                         <span class="user-name">닉네임</span>
                         <div class="chat-list">
@@ -135,19 +143,61 @@
                             <p class="chat-item private">가나다라마바사가나다라가나다라마바사
                                 가나다라가나다라마바사가나다라</p>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <p class="chat-system-msg new">New Message</p>
+                    <!-- <p class="chat-system-msg new">New Message</p> -->
                 </div>
                 <div class="chat-input-wrap">
                     <form method="POST" action="" name="chat-frm" class="chat-frm">
-                        <span class="chat-type">All</span>
-                        <textarea placeholder="Type your message..." title="메시지입력" class="chat-input"></textarea>
-                        <button class="chat-send">send</button>
+                        <span @click="changeType" class="chat-type" :class="chatType">{{chatType}}</span>
+                        <textarea 
+                            v-model="msg"
+                            @keyup.13="submitMsg"
+                            @keyup.9="changeType"
+                            placeholder="Type your message..." 
+                            title="메시지입력" 
+                            class="chat-input">
+                        </textarea>
+                        <button
+                            @click.prevent="submitMsg"
+                            class="chat-send"
+                            >send
+                        </button>
                     </form>
                 </div>
             </section>
         </div>
     </div>
+    <script>
+        new Vue({
+            el: '.app-wrap',
+            data: {
+                chatType: 'All',
+                msgList: [],
+                msg: null,
+            },
+            methods: {
+                submitMsg: function() {
+                    const newMsg = {
+                        user: '토끼',
+                        text: this.msg,
+                        type: this.chatType,
+                    }
+                    this.msgList.push(newMsg)
+                    this.msg = null
+                },
+                changeType: function() {
+                    let chatType = this.chatType
+                    if( this.chatType == 'All') {
+                        this.chatType = 'Group'
+                    } else if( this.chatType == 'Group') {
+                        this.chatType = 'Whisper'
+                    } else {
+                        this.chatType = 'All'
+                    }
+                }
+            }
+        })
+    </script>
 </body>
 </html>

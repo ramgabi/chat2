@@ -650,12 +650,12 @@ input[type=number] {
                         border-bottom-left-radius: 10px;
                     }
         
-                    &.group {
+                    &.Group {
                         background-color: #6C78E5;
                         color: #fff;
                     }
         
-                    &.private {
+                    &.Whisper {
                         background-color: #F66363;
                         color: #fff;
                     }
@@ -696,6 +696,7 @@ input[type=number] {
                     padding-right: 10px;
                     font-size: 1.5rem;
                     color: #fff;
+                    cursor: pointer;
 
                     &::after {
                         content: ':';
